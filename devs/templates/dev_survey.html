@@ -1,0 +1,438 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block nav %}
+  {% include 'nav.html' with active_item='dev' %}
+{% endblock nav %}
+
+{% block content %}
+<div class='w-70-l w-100 center shadow-1 br3 bw0 mt5'>
+  <div class='w-100 bt bl br pa4-l pa3 bg-green br3 br--top bw0'>
+    <div class='mv2 pa3 w-100 white'>
+      <h1 class='mv2 pa3 white f2-ns f3 tc'>
+        Developer Survey: security behaviours and barriers
+      </h1>
+      <p class='f4 ph4-l ph2'>
+        This survey is for software developers, ops people, and anyone who
+        holds a technical role in a software or web development space.
+      </p>
+      <p class='f4 ph4-l ph2'>
+        If this isn't you, please check out the
+        <a href="{% url 'user-survey' %}" class='white dim'>user survey</a>
+        instead.
+      </p>
+      <p class='f4 ph4-l ph2'>
+        Where your answers would be different for different projects, please
+        choose the one that takes the majority of your time right now.
+      </p>
+      <p class='f4 ph4-l ph2'>
+        Please only fill this survey out once. I am relying on a honour system
+        instead of collecting identifying information to ensure data integrity,
+        so that you can be anonymous and feel comfortable to be completely honest.
+      </p>
+      <p class='f4 ph4-l ph2'>
+        Thanks for your time,
+      </p>
+      <p class='f4 ph4-l ph2'>
+        Keira
+      </p>
+    </div>
+  </div>
+<div class='w-100 bg-white bb bl br bw0 br3 br--bottom pa4-l pa3'>
+  <form method='post'>
+    {% csrf_token %}
+    <!-- DEMOGRAPHICS -->
+    <div class='mt3-ns mt2 mb2 pt3-l pt2 w-100'>
+      <h2 class='mb0 green'>About you</h2>
+      <!-- role -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          What does your job include? (choose all that apply)
+        </h3>
+        <ul class='list'>
+          <div class="flex flex-wrap w-100">
+            <div class="w-20-l w-third-m w-100 pa2">
+              <li>
+                <label>
+                {{ form.backend }} Backend development
+                </label>
+              </li>
+            </div>
+            <div class="w-20-l w-third-m w-100 pa2">
+              <li>
+                <label>
+                {{ form.frontend }} Frontend development
+                </label>
+              </li>
+            </div>
+            <div class="w-20-l w-third-m w-100 pa2">
+              <li>
+                <label>
+                {{ form.archeng }} Architecture or engineering
+                </label>
+              </li>
+            </div>
+            <div class="w-20-l w-third-m w-100 pa2">
+              <li>
+                <label>
+                {{ form.devops }} DevOps
+                </label>
+              </li>
+            </div>
+            <div class="w-20-l w-third-m w-100 pa2">
+              <li>
+                <label>
+                {{ form.infrastructure }} Infrastructure
+                </label>
+              </li>
+            </div>
+            <div class="w-20-l w-third-m w-100 pa2">
+              <li>
+                <label>
+                {{ form.project }} Project or staff management
+                </label>
+              </li>
+            </div>
+            <div class="w-20-l w-third-m w-100 pa2">
+              <li>
+                <label>
+                {{ form.qa }} Quality Assurance
+                </label>
+              </li>
+            </div>
+            <div class="w-20-l w-third-m w-100 pa2">
+              <li>
+                <label>
+                {{ form.testing }} Testing
+                </label>
+              </li>
+            </div>
+            <div class="w-20-l w-third-m w-100 pa2">
+              <li>
+                <label>
+                {{ form.security }} Security
+                </label>
+              </li>
+            </div>
+            <div class="w-20-l w-third-m w-100 pa2">
+              <li>
+                <label>
+                {{ form.ux }} UX/UI
+                </label>
+              </li>
+            </div>
+          </div>
+        </ul>
+      </div>
+      <!-- sec_training -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          What's the highest level of information security training you've undertaken?
+        </h3>
+        {% include 'radio.html' with field=form.sec_training %}
+      </div>
+      <!-- my_awareness -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          How would you rate your own security competence?
+        </h3>
+        {% include 'radio.html' with field=form.my_awareness %}
+      </div>
+      <!-- gender -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          What's your gender?
+        </h3>
+        {% include 'radio.html' with field=form.gender %}
+      </div>
+      <!-- tech -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          What languages or frameworks do you use most?
+        </h3>
+        {{ form.tech|setclass:'w-100 pa2 ba br3 bw1 b--light-green' }}
+      </div>
+    </div>
+    <!-- RATE YOUR WORK -->
+    <div class='mt3-ns mt2 mb2 pt3-l pt2 w-100'>
+      <h2 class='mb0 green'>Your workplace</h2>
+      <p class='f4 ph4-l ph2'>
+        For this section, please answer for the project that takes the
+        majority of your time right now.
+      </p>
+      <!-- employer_sec_support -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          How would you rate your employer's (or client's) committment to
+          information security?
+        </h3>
+        {% include 'radio.html' with field=form.employer_sec_support %}
+      </div>
+      <!-- policy -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          Is there an information security policy which sets standards for your work?
+        </h3>
+        {% include 'radio.html' with field=form.policy %}
+      </div>
+      <!-- sec_workflow -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          Do you include security testing or review in your workflow?
+        </h3>
+        {% include 'radio.html' with field=form.sec_workflow %}
+      </div>
+      <!-- ACTIONS -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          Does the appropriate person on the project take these security
+          measures?
+        </h3>
+        <p class='green'>
+          (Psst! If you're completing this on a phone, please rotate to landscape
+          for this section, or scroll to see all options.)
+        </p>
+        <div class='w-100 overflow-scroll'>
+          <table class='pv2 br3'>
+            <thead class='tc'>
+              <tr>
+                <th class='pa2'></th>
+                <th class='pa2 bg-light-green' colspan='4'>Yes</th>
+                <th class='pa2 bg-light-green' colspan='2'>No</th>
+                <th class='pa2 bg-light-green' colspan='2'>Other</th>
+              </tr>
+              <tr>
+                <th class='pa2'></th>
+                <th class='pa2 bl b--light-green'>Always</th>
+                <th class='pa2'>Often</th>
+                <th class='pa2'>Sometimes</th>
+                <th class='pa2 br b--light-green'>Rarely</th>
+                <th class='pa2 bl b--light-green'>Never</th>
+                <th class='pa2 br b--light-green'>Not relevant</th>
+                <th class='pa2 bl b--light-green'>I don't know</th>
+                <th class='pa2 br b--light-green'>Prefer not to answer</th>
+              </tr>
+            </thead>
+            <tbody class='bg-white'>
+        <!-- review_dependencies -->
+              <tr class='striped--near-white'>
+                <td>Audit dependencies before use</td>
+                {% include 'radio_table.html' with field=form.review_dependencies %}
+              </tr>
+        <!-- update_dependencies -->
+              <tr>
+                <td>Regularly upgrade dependencies</td>
+                {% include 'radio_table.html' with field=form.update_dependencies %}
+              </tr>
+        <!-- key_rotation -->
+              <tr class='striped--near-white'>
+                <td>Rotate keys</td>
+                {% include 'radio_table.html' with field=form.key_rotation %}
+              </tr>
+        <!-- rm_ex_dev_access -->
+              <tr>
+                <td>Remove access for former devs</td>
+                {% include 'radio_table.html' with field=form.rm_ex_dev_access %}
+              </tr>
+        <!-- rm_committed_keys -->
+              <tr class='striped--near-white'>
+                <td>Keep secrets out of the repo</td>
+                {% include 'radio_table.html' with field=form.rm_committed_keys %}
+              </tr>
+        <!-- vuln_scan -->
+              <tr>
+                <td>Scan for vulnerabilities</td>
+                {% include 'radio_table.html' with field=form.vuln_scan %}
+              </tr>
+        <!-- pentest -->
+              <tr class='striped--near-white'>
+                <td>Get professional penetetraion testing</td>
+                {% include 'radio_table.html' with field=form.pentest %}
+              </tr>
+        <!-- logging -->
+              <tr>
+                <td>Monitor logs for suspicious activity</td>
+                {% include 'radio_table.html' with field=form.logging %}
+              </tr>
+        <!-- code_review -->
+              <tr class='striped--near-white'>
+                <td>Review code for security problems</td>
+                {% include 'radio_table.html' with field=form.code_review %}
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+
+    <!-- BARRIERS -->
+    <div class='mt3-ns mt2 mb2 pt3-l pt2 w-100'>
+      <h2 class='mb0 green'>Barriers</h2>
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          Rate the impact that these barriers have had on your ability to
+          create secure products, throughout your career.
+        </h3>
+        <p class='green'>
+          (Psst! If you're completing this on a phone, please rotate to landscape
+          for this section too, or scroll to see all options.)
+        </p>
+        <div class='w-100 overflow-scroll'>
+          <table class='pv2 br3'>
+            <thead class='tc'>
+              <tr>
+                <th class='pa2'></th>
+                <th class='pa2'>Significant impact</th>
+                <th class='pa2'>Moderate impact</th>
+                <th class='pa2'>Slight impact</th>
+                <th class='pa2'>No impact</th>
+                <th class='pa2'>Prefer not to answer</th>
+              </tr>
+            </thead>
+            <tbody class='bg-white'>
+        <!-- no_time -->
+              <tr class='striped--near-white'>
+                <td>Limited time</td>
+                {% include 'radio_table.html' with field=form.no_time %}
+              </tr>
+        <!-- employer_interest -->
+              <tr>
+                <td>Lack of employer or client interest in security</td>
+                {% include 'radio_table.html' with field=form.employer_interest %}
+              </tr>
+        <!-- employer_understanding -->
+              <tr class='striped--near-white'>
+                <td>Lack of employer or client technical understanding</td>
+                {% include 'radio_table.html' with field=form.employer_understanding %}
+              </tr>
+        <!-- user_interest -->
+              <tr>
+                <td>Lack of user interest</td>
+                {% include 'radio_table.html' with field=form.user_interest %}
+              </tr>
+      <!-- my_interest -->
+              <tr class='striped--near-white'>
+                <td>Your own lack of interest</td>
+                {% include 'radio_table.html' with field=form.my_interest %}
+              </tr>
+      <!-- my_expertise -->
+              <tr>
+                <td>Your expertise</td>
+                {% include 'radio_table.html' with field=form.my_expertise %}
+              </tr>
+      <!-- team_expertise -->
+              <tr class='striped--near-white'>
+                <td>Team expertise</td>
+                {% include 'radio_table.html' with field=form.team_expertise %}
+              </tr>
+      <!-- working_relationship -->
+              <tr>
+                <td>Relationship with security team or other security professionals</td>
+                {% include 'radio_table.html' with field=form.working_relationship%}
+              </tr>
+      <!-- legacy -->
+              <tr class='striped--near-white'>
+                <td>Legacy code and dependencies</td>
+                {% include 'radio_table.html' with field=form.legacy %}
+              </tr>
+      <!-- resources -->
+              <tr>
+                <td>Limited project budget</td>
+                {% include 'radio_table.html' with field=form.resources %}
+              </tr>
+      <!-- difficult_docs -->
+              <tr class='striped--near-white'>
+                <td>Unclear, incomplete or incomprehensible documentation</td>
+                {% include 'radio_table.html' with field=form.difficult_docs %}
+              </tr>
+      <!-- confusing_advice -->
+              <tr>
+                <td>Confusing security advice</td>
+                {% include 'radio_table.html' with field=form.confusing_advice %}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- other_barriers -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          Describe any other barriers that prevent you from building secure
+          products.
+          <span class='light-silver'>(Optional)</span>
+        </h3>
+        {{ form.other_barriers|setclass:'w-100 pa2 ba br3 bw1 b--light-green' }}
+      </div>
+    </div>
+    <div class='mt3-ns mt2 mb2 pt3-l pt2 w-100'>
+      <h2 class='mb0 green'>Feelings</h2>
+      <!-- comfort_approaching -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          How comfortable do you feel approaching information security people
+          with questions or concerns?
+        </h3>
+        {% include 'radio.html' with field=form.comfort_approaching %}
+      </div>
+      <!-- comfort_researching -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          How comfortable are you researching information security topics?
+        </h3>
+        {% include 'radio.html' with field=form.comfort_researching %}
+      </div>
+      <!-- comfort_explanation -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          Describe what factors lead to you feeling more or less comfortable
+          approaching security people or topics.
+          <span class='light-silver'>(Optional)</span>
+        </h3>
+        {{ form.comfort_explanation|setclass:'w-100 pa2 ba br3 bw1 b--light-green' }}
+      </div>
+      <!-- what_would_help -->
+      <div class='w-100 mv3-ns mv2 pv2'>
+        <h3 class='green f4 b'>
+          Describe what measures would help you make more secure products.
+        </h3>
+        {{ form.what_would_help|setclass:'w-100 pa2 ba br3 bw1 b--light-green' }}
+      </div>
+    </div>
+    <!-- STORIES -->
+    <div class='mt3-ns mt2 mb2 pt3-l pt2 w-100'>
+      <h2 class='mb0 green'>Story time!</h2>
+      <!-- story -->
+      <div class='pv2'>
+        <h3 class='green f4 b'>
+          Tell me a story or two about security in your work, at any time, from
+          any project.
+          <span class='light-silver'>(Optional)</span>
+        </h3>
+        <p>
+          Please no names or identifying information.
+        </p>
+        <p>
+          Remember that this survey is to inform security professionals about
+          real-world issues developers and engineers face.
+          As a result I want to hear your grizzly, funny, irritating and
+          embarrassing tales, but you need to keep in mind they may be published,
+          so sanitise your inputs!
+        </p>
+        {{ form.story|setclass:'w-100 pa2 ba br3 bw1 b--light-green' }}
+      </div>
+      <!-- anything_else -->
+      <div class='pv2'>
+        <h3 class='green f4 b'>
+          Is there anything else you'd like to add?
+          <span class='light-silver'>(Optional)</span>
+        </h3>
+        {{ form.anything_else|setclass:'w-100 pa2 ba br3 bw1 b--light-green' }}
+      </div>
+    </div>
+    <button class='bg-green pa3 ph4 ba b--green br3 white b white-hover grow'
+      type='submit'>
+      Submit
+    </button>
+  </form>
+</div>
+</div>
+{% endblock content %}

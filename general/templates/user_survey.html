@@ -1,0 +1,498 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block nav %}
+  {% include 'nav.html' with active_item='user' %}
+{% endblock nav %}
+
+{% block content %}
+<div class='w-70-l w-100 center shadow-1 br3 bw0 mt5'>
+  <div class='w-100 bt bl br pa4-l pa3 bg-green br3 br--top bw0'>
+    <div class='mv2 pa3 w-100 white'>
+      <h1 class='mv2 pa3 white f2-ns f3 tc'>
+        User Survey: security behaviours and barriers
+      </h1>
+      <p class='f4 ph4-l ph2'>
+        This survey is for anyone who uses the internet.
+      </p>
+      <p class='f4 ph4-l ph2'>
+        If you're a developer feel free to submit this survey, but I'd
+        be even keener to hear your thoughts over on the
+        <a href="{% url 'dev-survey' %}" class='white dim'>developer survey</a>.
+      </p>
+      <p class='f4 ph4-l ph2'>
+        Please only fill this survey out once. I am relying on a honour system
+        instead of collecting identifying information to ensure data integrity,
+        so that you can be anonymous and feel comfortable to be completely honest.
+      </p>
+      <p class='f4 ph4-l ph2'>
+        Thanks for your time,
+      </p>
+      <p class='f4 ph4-l ph2'>
+        Keira
+      </p>
+    </div>
+  </div>
+  <div class='w-100 bg-white bb bl br bw0 br3 br--bottom pa4-l pa3'>
+    <form method='post'>
+      {% csrf_token %}
+      <!-- DEMOGRAPHICS -->
+      <div class='mt3-ns mt2 mb2 pt3-l pt2 w-100'>
+        <h2 class='mb0 green'>About you</h2>
+        <!-- age_range -->
+        <div class='w-100 mv3-ns mv2 pv2'>
+          <h3 class='green f4 b'>
+            Which is your age range?
+          </h3>
+          {% include 'radio.html' with field=form.age_range %}
+        </div>
+        <!-- sec_training -->
+        <div class='w-100 mv3-ns mv2 pv2'>
+          <h3 class='green f4 b'>
+            What's the highest level of information security training you've undertaken?
+          </h3>
+          {% include 'radio.html' with field=form.sec_training %}
+        </div>
+        <!-- gender -->
+        <div class='w-100 mv3-ns mv2 pv2'>
+          <h3 class='green f4 b'>
+            What's your gender?
+          </h3>
+          {% include 'radio.html' with field=form.gender %}
+        </div>
+        <!-- net_usage -->
+        <div class='w-100 mv3-ns mv2 pv2'>
+          <h3 class='green f4 b'>
+            How ofen do you use the internet?
+          </h3>
+          {% include 'radio.html' with field=form.net_usage %}
+        </div>
+      </div>
+      <!-- BEHAVIOURS -->
+      <div class='mt3-ns mt2 mb2 pt3-l pt2 w-100'>
+        <h2 class='mb0 green'>Your security steps</h2>
+        <!-- ACTIONS -->
+        <div class='w-100 mv3-ns mv2 pv2'>
+          <h3 class='green f4 b'>
+            Which of these do you do?
+          </h3>
+          <p class='green'>
+            (Psst! If you're completing this on a phone, please rotate to landscape
+            for this section, or scroll to see all options.)
+          </p>
+          <div class='w-100 overflow-scroll'>
+            <table class='pv2 br3'>
+              <thead class='tc'>
+                <tr>
+                  <th class='pa2'></th>
+                  <th class='pa2 bg-light-green' colspan='4'>Yes</th>
+                  <th class='pa2 bg-light-green'>No</th>
+                  <th class='pa2'></th>
+                </tr>
+                <tr>
+                  <th class='pa2'></th>
+                  <th class='pa2 bl b--light-green'>Everywhere</th>
+                  <th class='pa2'>Only at work and for important things</th>
+                  <th class='pa2'>Only for important things</th>
+                  <th class='pa2'>Only at work</th>
+                  <th class='pa2 br bl b--light-green'>I don't do this</th>
+                  <th class='pa2'>Prefer not to answer</th>
+                </tr>
+              </thead>
+              <tbody class='bg-white'>
+                <!-- pwd_mgr-->
+                <tr class='striped--near-white'>
+                  <td>Use a password manager</td>
+                  {% include 'radio_table.html' with field=form.pwd_mgr %}
+                </tr>
+                <!-- 'pwd_reuse', -->
+                <tr class='striped--near-white'>
+                  <td>Make a new password for each new account</td>
+                  {% include 'radio_table.html' with field=form.pwd_reuse %}
+                </tr>
+                <!-- 'pwd_long', -->
+                <tr class='striped--near-white'>
+                  <td>Use long passwords (16 characters or more)</td>
+                  {% include 'radio_table.html' with field=form.pwd_long %}
+                </tr>
+                <!-- 'twofa', -->
+                <tr class='striped--near-white'>
+                  <td>Use 2 Factor Authentication</td>
+                  {% include 'radio_table.html' with field=form.twofa %}
+                </tr>
+                <!-- 'backups', -->
+                <tr class='striped--near-white'>
+                  <td>Make regular backups</td>
+                  {% include 'radio_table.html' with field=form.backups %}
+                </tr>
+                <!-- 'vpn', -->
+                <tr class='striped--near-white'>
+                  <td>Use a Virtual Private Network (VPN)</td>
+                  {% include 'radio_table.html' with field=form.vpn %}
+                </tr>
+                <!-- 'ad_block', -->
+                <tr class='striped--near-white'>
+                  <td>Use an ad blocker</td>
+                  {% include 'radio_table.html' with field=form.ad_block %}
+                </tr>
+                <!-- 'updates', -->
+                <tr class='striped--near-white'>
+                  <td>Let my software automatically update</td>
+                  {% include 'radio_table.html' with field=form.updates %}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class='pv2'>
+            <h3 class='green f4 b'>
+              What sorts of sites or apps do you consider 'important' in
+              terms of security?
+              <span class='light-silver'>(Optional)</span>
+            </h3>
+            {{ form.important_things|setclass:'w-100 pa2 ba br3 bw1 b--light-green' }}
+          </div>
+          <div class='w-100 mv3-ns mv2 pv2'>
+            <h3 class='green f4 b'>
+              Where do you get information about internet security?
+            </h3>
+            <ul class='list'>
+              <div class="flex flex-wrap w-100">
+                <div class="w-20-l w-third-m w-100 pa2">
+                  <li>
+                    <label>
+                    {{ form.online }} Search online
+                    </label>
+                  </li>
+                </div>
+                <div class="w-20-l w-third-m w-100 pa2">
+                  <li>
+                    <label>
+                    {{ form.family }} Family or friends
+                    </label>
+                  </li>
+                </div>
+                <div class="w-20-l w-third-m w-100 pa2">
+                  <li>
+                    <label>
+                    {{ form.guru_family }} Family or friends in IT
+                    </label>
+                  </li>
+                </div>
+                <div class="w-20-l w-third-m w-100 pa2">
+                  <li>
+                    <label>
+                    {{ form.sec_org }} Security organisations
+                    </label>
+                  </li>
+                </div>
+                <div class="w-20-l w-third-m w-100 pa2">
+                  <li>
+                    <label>
+                    {{ form.gov }} Government agencies
+                    </label>
+                  </li>
+                </div>
+                <div class="w-20-l w-third-m w-100 pa2">
+                  <li>
+                    <label>
+                    {{ form.other }} Other (describe below)
+                    </label>
+                  </li>
+                </div>
+                <div class="w-20-l w-third-m w-100 pa2">
+                  <li>
+                    <label>
+                    {{ form.noanswer }} Prefer not to say
+                    </label>
+                  </li>
+                </div>
+              </div>
+            </ul>
+            <h3 class='green f4 b'>
+              Describe any others below
+              <span class='light-silver'>(Optional)</span>
+            </h3>
+            {{ form.other_sources|setclass:'w-100 pa2 ba br3 bw1 b--light-green' }}
+          </div>
+        </div>
+      </div>
+      <div class='mt3-ns mt2 mb2 pt3-l pt2 w-100'>
+        <h2 class='mb0 green'>Your security priorities</h2>
+        <div class='w-100 mv3-ns mv2 pv2'>
+          <h3 class='green f4 b'>
+            Do you think you are likely to be a target of hacker, scam, or online
+            attack?
+          </h3>
+          {% include 'radio.html' with field=form.target %}
+          <h3 class='green f4 b'>
+            Why / why not?
+          </h3>
+          {{ form.target_reasons|setclass:'w-100 pa2 ba br3 bw1 b--light-green' }}
+        </div>
+        <div class='w-100 mv3-ns mv2 pv2'>
+          <h3 class='green f4 b'>
+            How would you rate your concern for the security of these types of
+            data?
+          </h3>
+          <div class='w-100 overflow-scroll'>
+            <table class='pv2 br3'>
+              <thead class='tc'>
+                <tr>
+                  <th class='pa2'></th>
+                  <th class='pa2'>Very concerned</th>
+                  <th class='pa2'>Somewhat concerned</th>
+                  <th class='pa2'>Ambivalent</th>
+                  <th class='pa2'>Somewhat unconcerned</th>
+                  <th class='pa2'>Not concerned</th>
+                  <th class='pa2'>Prefer not to answer</th>
+                </tr>
+              </thead>
+              <tbody class='bg-white'>
+                <!-- financial-->
+                <tr class='striped--near-white'>
+                  <td>Your financial information</td>
+                  {% include 'radio_table.html' with field=form.financial %}
+                </tr>
+                <!-- email_account-->
+                <tr class='striped--near-white'>
+                  <td>Your email account password</td>
+                  {% include 'radio_table.html' with field=form.email_account %}
+                </tr>
+                <!-- home_address-->
+                <tr class='striped--near-white'>
+                  <td>Your home address</td>
+                  {% include 'radio_table.html' with field=form.home_address %}
+                </tr>
+                <!-- medical_info -->
+                <tr class='striped--near-white'>
+                  <td>Your medical information</td>
+                  {% include 'radio_table.html' with field=form.medical_info %}
+                </tr>
+                <!-- photos -->
+                <tr class='striped--near-white'>
+                  <td>Your photos</td>
+                  {% include 'radio_table.html' with field=form.photos %}
+                </tr>
+                <!-- location_history -->
+                <tr class='striped--near-white'>
+                  <td>Your location data</td>
+                  {% include 'radio_table.html' with field=form.location_history %}
+                </tr>
+                <!-- children's info, -->
+                <tr class='striped--near-white'>
+                  <td>Children's information or images</td>
+                  {% include 'radio_table.html' with field=form.childrens_info %}
+                </tr>
+                <!-- browser_search_history -->
+                <tr class='striped--near-white'>
+                  <td>Your search or browser history</td>
+                  {% include 'radio_table.html' with field=form.browser_search_history %}
+                </tr>
+                <!-- social_sec_tfn -->
+                <tr class='striped--near-white'>
+                  <td>Your social security number, government ID number or tax file number</td>
+                  {% include 'radio_table.html' with field=form.social_sec_tfn %}
+                </tr>
+                <!-- social_media -->
+                <tr class='striped--near-white'>
+                  <td>Your social media passwords</td>
+                  {% include 'radio_table.html' with field=form.social_media %}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class='w-100 mv3-ns mv2 pv2'>
+          <h3 class='green f4 b'>
+            How concerned are you with avoiding the following?
+          </h3>
+          <div class='w-100 overflow-scroll'>
+            <table class='pv2 br3'>
+              <thead class='tc'>
+                <tr>
+                  <th class='pa2'></th>
+                  <th class='pa2'>Very concerned</th>
+                  <th class='pa2'>Somewhat concerned</th>
+                  <th class='pa2'>Ambivalent</th>
+                  <th class='pa2'>Somewhat unconcerned</th>
+                  <th class='pa2'>Not concerned</th>
+                  <th class='pa2'>Prefer not to answer</th>
+                </tr>
+              </thead>
+              <tbody class='bg-white'>
+                <!-- loss_of_data-->
+                <tr class='striped--near-white'>
+                  <td>
+                    Loss of your data (you can no longer access it for whatever
+                    reason)
+                  </td>
+                  {% include 'radio_table.html' with field=form.loss_of_data %}
+                </tr>
+                <!-- loss of funds-->
+                <tr class='striped--near-white'>
+                  <td>
+                    Losing money (eg. through theft, or fees for service to help
+                    you after an online attack)
+                  </td>
+                  {% include 'radio_table.html' with field=form.loss_of_funds %}
+                </tr>
+                <!-- dignity-->
+                <tr class='striped--near-white'>
+                  <td>
+                    Loss of dignity or privacy (eg. having embarrassing
+                    photos or medical info made public)
+                  </td>
+                  {% include 'radio_table.html' with field=form.dignity %}
+                </tr>
+                <!-- physical_safety -->
+                <tr class='striped--near-white'>
+                  <td>
+                    Physical danger (eg. someone finding and harming you in person
+                    after an interaction online)
+                  </td>
+                  {% include 'radio_table.html' with field=form.physical_safety %}
+                </tr>
+                <!-- emotional_safety -->
+                <tr class='striped--near-white'>
+                  <td>Emotional danger (eg. from online abuse or bullying)</td>
+                  {% include 'radio_table.html' with field=form.emotional_safety %}
+                </tr>
+                <!-- restriction -->
+                <tr class='striped--near-white'>
+                  <td>
+                    Restriction of your speech, movements or association online
+                    (eg. being blocked from sites, or feeling like you should not
+                    say something)
+                  </td>
+                  {% include 'radio_table.html' with field=form.restriction %}
+                </tr>
+                <!-- integrity -->
+                <tr class='striped--near-white'>
+                  <td>
+                    Loss of integrity (eg. being manipulated or blackmailed)
+                  </td>
+                  {% include 'radio_table.html' with field=form.integrity %}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class='pv2'>
+          <h3 class='green f4 b'>
+            Describe briefly what you think of happening, when you hear a system,
+            app, or person has been 'hacked'.
+          </h3>
+          {{ form.what_threat_looks_like|setclass:'w-100 pa2 ba br3 bw1 b--light-green' }}
+          {% if form.errors %}
+          <p class='green'>Error: {{ form.error }}</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class='mt3-ns mt2 mb2 pt3-l pt2 w-100'>
+        <h2 class='mb0 green'>Feeling secure</h2>
+        <!-- age_range -->
+        <div class='w-100 mv3-ns mv2 pv2'>
+          <h3 class='green f4 b'>
+            How true are each of these statements, for you?
+          </h3>
+          <div class='w-100 overflow-scroll'>
+            <table class='pv2 br3'>
+              <thead class='tc'>
+                <tr>
+                  <th class='pa2'></th>
+                  <th class='pa2'>Strongly agree</th>
+                  <th class='pa2'>Somewhat agree</th>
+                  <th class='pa2'>Neither agree or disagree</th>
+                  <th class='pa2'>Somewhat disagree</th>
+                  <th class='pa2'>Strongly disagree</th>
+                  <th class='pa2'>Prefer not to answer</th>
+                </tr>
+              </thead>
+              <tbody class='bg-white'>
+                <!-- good_security_steps-->
+                <tr class='striped--near-white'>
+                  <td>I take good security steps now</td>
+                  {% include 'radio_table.html' with field=form.good_security_steps %}
+                </tr>
+                <!-- feel_secure-->
+                <tr class='striped--near-white'>
+                  <td>I feel like my data is secure online</td>
+                  {% include 'radio_table.html' with field=form.feel_secure %}
+                </tr>
+                <!-- not_concerned-->
+                <tr class='striped--near-white'>
+                  <td>I'm not concerned about information security</td>
+                  {% include 'radio_table.html' with field=form.not_concerned %}
+                </tr>
+                <!-- not_a_target -->
+                <tr class='striped--near-white'>
+                  <td>I'm not likely to be a target for hacking or information security attacks</td>
+                  {% include 'radio_table.html' with field=form.not_a_target %}
+                </tr>
+                <!-- confused -->
+                <tr class='striped--near-white'>
+                  <td>Information security advice is too confusing to follow</td>
+                  {% include 'radio_table.html' with field=form.confused %}
+                </tr>
+                <!-- inconvenient -->
+                <tr class='striped--near-white'>
+                  <td>Security measures are inconvenient</td>
+                  {% include 'radio_table.html' with field=form.inconvenient %}
+                </tr>
+                <!-- locking_out -->
+                <tr class='striped--near-white'>
+                  <td>
+                    I worry I'll get locked out of my services if I use secure
+                    passwords or 2-factor authentication
+                  </td>
+                  {% include 'radio_table.html' with field=form.locking_out %}
+                </tr>
+                <!-- forget -->
+                <tr class='striped--near-white'>
+                  <td>I mean to take more security steps, but I forget to</td>
+                  {% include 'radio_table.html' with field=form.forget %}
+                </tr>
+                <!-- scam_concern  -->
+                <tr class='striped--near-white'>
+                  <td>
+                    I'm concerned that password managers might be a scam to get my
+                    passwords
+                  </td>
+                  {% include 'radio_table.html' with field=form.scam_concern%}
+                </tr>
+                <!-- time_issues -->
+                <tr class='striped--near-white'>
+                  <td>I just don't have time to upgrade my security online</td>
+                  {% include 'radio_table.html' with field=form.time_issues %}
+                </tr>
+                <!-- trust_issues -->
+                <tr class='striped--near-white'>
+                  <td>I trust software updates</td>
+                  {% include 'radio_table.html' with field=form.trust_issues %}
+                </tr>
+                <!-- confident -->
+                <tr class='striped--near-white'>
+                  <td>I'm confident in my ability to improve my security online</td>
+                  {% include 'radio_table.html' with field=form.confident %}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class='pv2'>
+          <h3 class='green f4 b'>
+            If there is anything else you'd like to add on the topic of
+            information security, please do so here.
+            <span class='light-silver'>(Optional)</span>
+          </h3>
+          {{ form.anything_else|setclass:'w-100 pa2 ba br3 bw1 b--light-green' }}
+        </div>
+      </div>
+      <button class='bg-green pa3 ph4 ba b--green br3 white b white-hover grow'
+        type='submit'>
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+  {% include 'nav.html' with active_item='dev' %}
+{% endblock nav %}
+
+{% block content %}
+<div class='w-70-l w-100 center shadow-1 bg-white ba bw0 br3 pa4-l pa3 mt5'>
+  <h1 class='mv2 pa3 green f2 tc'>Thanks for submitting!</h1>
+  <div class='mv2 pa3-l pa2 w-100'>
+    <p class='f4 ph4-l ph2'>
+      If you're looking for information on how to create more secure products,
+      I reccommend you check out
+      <a href='https://owasp.org' class='link green dim' target='blank'>OWASP</a>.
+      They have a wealth of guides to use, and an excellent vulnerability
+      scanning tool called Zed Attack Proxy (ZAP).
+    </p>
+    <p class='f4 ph4-l ph2'>
+      If you're a Django developer, my partner and I gave a talk last year
+      explaining how developers can begin to use ZAP with Django. The video
+      is <a href='https://www.youtube.com/watch?v=nqR5pOgkmbk' class='link green dim' target='blank'>
+      here.
+    </p>
+  </div>
+</div>
+{% endblock content %}

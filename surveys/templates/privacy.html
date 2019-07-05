@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+  {% include 'nav.html' with active_item='privacy' %}
+{% endblock nav %}
+
+{% block content %}
+<div class='w-70-l w-100 center shadow-1 br3 bw0 mt5'>
+  <div class='w-100 bt bl br pa3 bg-green br3 br--top bw0'>
+    <div class='mv2 pa2 w-100 white'>
+      <h1 class='white f2 tc'>Your privacy</h1>
+    </div>
+  </div>
+  <div class='w-100 bt bl br pv3 ph4-l pa3 bg-white br3 br--bottom bw0'>
+    <p class='f4 ph4-l ph2'>
+      To meet the aim of these surveys, I need you to be as honest as you can.
+      To make that happen, the survey is as anonymous as I can make it and
+      I've explained a few things below, so you can feel comfortable.
+    </p>
+    <h3 class='f3-l f4 ph4-l ph2 green'>What information do I collect?</h3>
+    <p class='f4 ph4-l ph2'>
+      I collect the informaton you give me in the survey itself (your answers),
+      and a little bit of logging information, such as the time you completed
+      it and your IP address (the number your internet connection uses to
+      identify itself on the internet).
+    </p>
+    <p class='f4 ph4-l ph2'>
+      I'm not collecting your name, email, other contact details. The IP address
+      is not linked to the survey you submit, and isn't in the survey data.
+    </p>
+    <h3 class='f3-l f4 ph4-l ph2 green'>What will I do with it?</h3>
+    <p class='f4 ph4-l ph2'>
+      The survey answers you give will be used to find trends, and will be
+      presented to the public.
+    </p>
+    <p class='f4 ph4-l ph2'>
+      I'll also make the data available to researchers, but only after I check
+      through to make sure there are no personal identfiers or hints in the
+      data.
+    </p>
+    <h3 class='f3-l f4 ph4-l ph2 green'>Will I be able to identify you?</h3>
+    <p class='f4 ph4-l ph2'>
+      Mostly no, but there's something you should know about the internet!
+    </p>
+    <p class='f4 ph4-l ph2'>
+      Because the server collects your IP address and the time you open the
+      survey, and the survey itself collects the time you submit, I would
+      be able to see which IP address goes with which survey, if there's only
+      one person submitting at a time.
+    </p>
+    <p class='f4 ph4-l ph2'>
+      Your IP address could then tell me where you were when you submitted if
+      I decided to look, and if I had access to the sort of information owned
+      by governments, internet service providers and Google (I don't though!).
+      This is true of pretty much every website you ever visit.
+    </p>
+    <p class='green  f4 b ph4-l ph2'>But Keira, that sounds concerning!</p>
+    <p class='f4 ph4-l ph2'>
+      It does, doesn't it? You can protect yourself when you are browsing by
+      using <a href='https://www.torproject.org/' class='green link dim' target='blank'>TOR</a>,
+      or a
+      <a href='https://www.howtogeek.com/133680/htg-explains-what-is-a-vpn/' class='green link dim' target='blank'>
+      VPN</a>.
+    </p>
+    <p class='f4 ph4-l ph2'>
+      The purpose of the logs is to make sure the site is working properly,
+      and to give me a warning if someone is trying to attack it.
+      I promise to delete the logs (where the IP address is stored) as
+      soon as the survey open period is open, and never use them to identify
+      you.
+    </p>
+    <h3 class='f3-l f4 ph4-l ph2 green'>
+      What rights do you have over your survey after you submit?
+    </h3>
+    <p class='f4 ph4-l ph2'>
+      None.
+    </p>
+    <p class='f4 ph4-l ph2'>
+      This is because once you submit, I have no way to know for sure
+      that you actually sumitted a survey, or which one was yours.
+      That means I can't amend it for you if you want to change an answer, and
+      can't delete your answers for you if you want me to.
+    </p>
+    <p class='f4 ph4-l ph2'>
+      For that reason, I ask that you are careful not to include your name,
+      contact details, or any other identifying info. If I see such information
+      while I'm processing the data I'll do my best to remove it in any case.
+    </p>
+    <h3 class='f3-l f4 ph4-l ph2 green'>Cookies</h3>
+    <p class='f4 ph4-l ph2'>
+      This site doesn't put tracking cookies on your device.
+    </p>
+    <p class='f4 ph4-l ph2'>
+      I'm not using any analytics tools, tracking tools, ads, etc.
+      There is no authentication (you do't log in), so I'm not using any
+      cookies associated with that either.
+    </p>
+    <p class='f4 ph4-l ph2'>
+      The surveys are built in Django, and use a CSRF token, which is not used
+      for tracking.
+    </p>
+  </div>
+</div>
+{% endblock content %}

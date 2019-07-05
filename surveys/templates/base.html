@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="stylesheet" href="{% static '/css/tachyons-4.11.1.min.css' %}"/>
+    <link rel="stylesheet" href="{% static '/css/extra.css' %}"/>
+    <title>Survey {% block pagename %}{% endblock pagename %}</title>
+
+  </head>
+
+  <body class="bg-light-green shells near-black helvetica">
+
+<!-- NAVBAR
+===================================== -->
+  {% block nav %}
+  {% endblock nav %}
+
+<!-- CONTENT
+===================================== -->
+    <div class='w-100 pa2'>
+      {% block content %}
+      {% endblock content %}
+    </div>
+  </body>
+</html>
+
+<!-- NAV BURGER
+===================================== -->
+<script>
+  var menuIsOpen = false;
+  var menu = document.getElementById("menu-vertical");
+  var menuButton = document.getElementById("menu-btn");
+  function closeMenu() {
+    menu.className = menu.className.replace("show", "hide");
+    window.setTimeout(function() {
+      menu.className = menu.className.replace("dtc", "dn");
+    }, 300);
+    menuButton.innerHTML = "Menu";
+    menuButton.blur();
+    menuIsOpen = false;
+  }
+  function openMenu() {
+    menu.className = menu.className.replace("dn", "dtc");
+    window.setTimeout(function() {
+      menu.className = menu.className.replace("hide", "show");
+    }, 50);
+    menuButton.innerHTML = "Close";
+    menuButton.blur();
+    menuIsOpen = true;
+  }
+  window.onload = function() {
+    menuButton.addEventListener("click", function(e) {
+      e.preventDefault();
+      if (menuIsOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      };
+    });
+  };
+  window.onresize = closeMenu;
+</script>

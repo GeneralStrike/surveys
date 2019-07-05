@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+  {% include 'nav.html' with active_item='user' %}
+{% endblock nav %}
+
+{% block content %}
+<div class='w-70-l w-100 center shadow-1 bg-white ba bw0 br3 pa4-l pa3 mt5'>
+  <h1 class='mv2 pa3 green f2 tc'>Thanks for submitting!</h1>
+  <div class='mv2 pa3-l pa2 w-100'>
+    <p class='f4 ph4-l ph2'>
+      Please check out the links below if you'd like to know more about any of
+      the security topics covered in the survey.
+    </p>
+    <h3 class='f3-l f4 b ph4-l ph2 green'>Achievable security toolkit!</h3>
+    <p class='f4 ph4-l ph2'>
+      The Electronic Frontier Foundation has a program called
+      <a href='https://ssd.eff.org/' class='link dim green' target='blank'>Surveilance
+        Self-Defence </a>, which helps you understand and avoid surveilance online.
+      </p>
+    <h3 class='f3-l f4 b ph4-l ph2 green'>If you only do one thing, use 2FA</h3>
+    <p class='f4 ph4-l ph2'>
+      Use two factor authentication (also called multi-factor authentication,
+      or 2FA) where you can, but especially on important
+      services like you email account, your bank, and places where you store
+      the things you care most about (your home address, your photos, etc).
+    </p>
+    <p class='f4 ph4-l ph2'>
+      There's a great run-down on multi-factor authentication
+      <a href='https://ssd.eff.org/en/module/how-enable-two-factor-authentication' class='link dim green' target='blank'>
+      here</a>.
+    </p>
+    <h3 class='f3-l f4 b ph4-l ph2 green'>Passwords and password managers</h3>
+    <p class='f4 ph4-l ph2'>
+      Getting a password manager will help you set more secure passwords
+      (long ones!), and means you don't have to remember them all.
+      It's explained well
+      <a href='https://ssd.eff.org/en/module/creating-strong-passwords' class='link dim green' target='blank'>
+      here</a>.
+    </p>
+    <h3 class='f3-l f4 b ph4-l ph2 green'>Have you been hacked?</h3>
+    <p class='f4 ph4-l ph2'>
+      You can check your email to see if any of your logins have been stolen or
+      compromised, by going to
+      <a href='https://haveibeenpwnd.com' class='link green dim' target='blank'>
+      haveibeenpwnd.com</a>. There are instructions on what to do if you're
+      email comes up on a hacked list.
+    </p>
+    <p class='f4 ph4-l ph2'>
+      If you know you have had photos stolen, you should check out
+      <a href='https://badassarmy.org' class='link green dim' target='blank'>
+      BaddAssArmy.org</a>.
+    </p>
+  </div>
+</div>
+{% endblock content %}

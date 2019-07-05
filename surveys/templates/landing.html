@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+  {% include 'nav.html' with active_item='about' %}
+{% endblock nav %}
+
+{% block content %}
+<div class='w-70-l w-100 center shadow-1 br3 bw0 mt5'>
+  <div class='w-100 bt bl br pa3 bg-green br3 br--top bw0'>
+    <div class='mv2 pa2 w-100 white'>
+      <h1 class='white f2 tc'>Welcome!</h1>
+    </div>
+  </div>
+  <div class='w-100 bt bl br pv3 ph4-l pa3 bg-white br3 br--bottom bw0'>
+    <p class='f4 ph4-l ph2'>
+      These two surveys gather data and anectdotes from
+      both software users and software developers, on their habits,
+      thoughts, and feelings relating to information security.
+    </p>
+    <p class='f4 ph4-l ph2'>
+      The purpose is to contribute to a growing understanding of users and
+      developers among security professionals.
+    </p>
+    <p class='f4 ph4-l ph2'>
+      The data will be presented at the Diana Initiative 2019, and I'll make it
+      available at <a href='https://redandblack.io' class='link dim green'>
+      redandblack.io</a> sometime after that. You can contact me on
+      <a href='https://twitter.com/keira_may' class='link dim green'>Twitter</a>
+      if you'd like to be told when the information is available.
+    </p>
+    <p class='f4 ph4-l ph2'>
+      Please don't fill either survey out more than once. I am relying on a honour system
+      instead of collecting identifying information to ensure data integrity,
+      so that you can be anonymous and feel comfortable to be completely honest.
+    </p>
+    <p class='f4 ph4-l ph2'>
+      Thanks for your time!
+    </p>
+    <p class='f4 ph4-l ph2'>
+      Keira
+    </p>
+    <div class='w-100 flex flex-wrap justify-around ph3-l ph2-m pa2'>
+      <div class='w-40-l w-100 bg-green white tc br3 pa2 pa3-l mv2'>
+        <a href='user-survey' class='link white f2-l f3 b'>
+          Take me to the
+          survey for
+          <br/><span class='underline washed-blue'>everyone!<span><br/>
+        </a>
+      </div>
+      <div class='w-40-l w-100 bg-green white tc br3 pa2 pa3-l mv2'>
+        <a href='dev-survey' class='link white f2-l f3 b'>
+          Take me to the
+          survey for
+          <br/><span class='underline washed-yellow'>developers</span><br/>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

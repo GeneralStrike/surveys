@@ -1,0 +1,50 @@
+<nav class="bb bg-mid-light-green b--white-10 pa2 absolute b dt dt--fixed tracked ttu z-999">
+  <!-- Horizontal menu -->
+  <div class="dn dtc-l tc w-90 pa2 mb3">
+      {% if active_item == 'about' %}
+      <a class="ml3 white underlne" href="/">About</a>
+      {% else %}
+      <a class="link ml3 white" href="/">About</a>
+      {% endif %}
+      {% if active_item == 'privacy' %}
+      <a class="ml3 white underline" href="{% url 'privacy' %}">Privacy</a>
+      {% else %}
+      <a class="ml3 link white" href="{% url 'privacy' %}">Privacy</a>
+      {% endif %}
+      {% if active_item == 'user' %}
+      <a class="ml3 white underline" href="{% url 'user-survey' %}">User survey</a>
+      {% else %}
+      <a class="ml3 link white" href="{% url 'user-survey' %}">User survey</a>
+      {% endif %}
+      {% if active_item == 'dev' %}
+      <a class="ml3 white underline"href="{% url 'dev-survey' %}">Developer survey</a>
+      {% else %}
+      <a class="ml3 link white"href="{% url 'dev-survey' %}">Developer survey</a>
+      {% endif %}
+  </div>
+  <!-- Vertical menu -->
+  <div class="absolute dn hide mt2 pr3 tr w-100 bg-mid-light-green" id="menu-vertical">
+    {% if active_item == 'about' %}
+      <a class="db dim underline pv3 white" href="/">About</a>
+    {% else %}
+      <a class="db dim link pv3 white" href="/">About</a>
+    {% endif %}
+    {% if active_item == 'privacy' %}  
+      <a class="db dim underline pv3 white" href="{% url 'privacy' %}">Privacy</a>
+      {% else %}
+      <a class="db dim link pv3 white" href="{% url 'privacy' %}">Privacy</a>
+    {% endif %}
+    {% if active_item == 'user' %}
+      <a class="db dim underline pv3 white" href="{% url 'user-survey' %}">User survey</a>
+    {% else %}
+      <a class="db dim link pv3 white" href="{% url 'user-survey' %}">User survey</a>
+    {% endif %}
+    {% if active_item == 'dev' %}
+      <a class="db dim underline pv3 white" href="{% url 'dev-survey' %}">Developer survey</a>
+    {% else %}
+      <a class="db dim link pv3 white" href="{% url 'dev-survey' %}">Developer survey</a>
+    {% endif %}
+  </div>
+  <!-- Menu button -->
+  <a href="" id="menu-btn" class="dim dn-l dtc link white tr w-25 pr3">Menu</a>
+</nav>
